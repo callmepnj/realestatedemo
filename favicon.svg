@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="House icon">
+  <rect width="64" height="64" rx="16" fill="#0b1412"/>
+  <path d="M12 30.5 32 14l20 16.5v19A4.5 4.5 0 0 1 47.5 54h-31A4.5 4.5 0 0 1 12 49.5v-19Z" fill="#d4b16a"/>
+  <path d="M22 52V34h20v18" fill="#11211e"/>
+  <path d="M27 25h10v7H27z" fill="#11211e"/>
+  <path d="M28 52V40h8v12" fill="#d4b16a"/>
+</svg>
