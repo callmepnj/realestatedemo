@@ -1,4 +1,4 @@
-import { brandData } from "../data/brand.js";
+﻿import { brandData } from "../data/brand.js";
 import { legalLinks, mobileNavigationGroups, moreNavigation, primaryNavigation, quickLinks } from "../data/navigation.js";
 
 const routeMap = {
@@ -94,11 +94,11 @@ export function renderHeader(currentPage) {
       ${renderDesktopNav(currentPage)}
 
       <div class="header-actions">
+        <a class="btn btn-outline header-actions__secondary" href="${brandData.social.whatsapp}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
           <span class="theme-toggle__icon" aria-hidden="true">?</span>
           <span class="sr-only theme-toggle__label">Toggle theme</span>
         </button>
-        <a class="btn btn-outline header-actions__secondary" href="${brandData.social.whatsapp}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a class="header-cta" href="${contactHref("Site Visit")}">Book Site Visit</a>
       </div>
 
@@ -163,11 +163,23 @@ export function initReveal() {
 }
 
 function applyTheme(theme) {
+  const isLight = theme === "light";
+  const toggleLabel = isLight ? "Switch to dark mode" : "Switch to light mode";
+  const toggleIcon = isLight ? "☾" : "☀";
+
   document.body.dataset.theme = theme;
-  document.getElementById("themeToggle")?.setAttribute("title", theme === "light" ? "Switch to dark mode" : "Switch to light mode");
+
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = themeToggle?.querySelector(".theme-toggle__icon");
+  themeToggle?.setAttribute("title", toggleLabel);
+  themeToggle?.setAttribute("aria-label", toggleLabel);
+  if (themeIcon) {
+    themeIcon.textContent = toggleIcon;
+  }
+
   const mobileButton = document.getElementById("mobileThemeToggle");
   if (mobileButton) {
-    mobileButton.textContent = theme === "light" ? "Switch To Dark" : "Switch To Light";
+    mobileButton.textContent = isLight ? "Switch To Night" : "Switch To Day";
   }
 }
 
@@ -282,3 +294,5 @@ export function initializeChrome(currentPage) {
   initOutsideClose();
   initFloatingWhatsApp();
 }
+
+

@@ -1,4 +1,5 @@
 ﻿import { addRecord, clearRecords, exportRecordsCsv } from "./lead-store.js";
+import { initChatbot } from "./chatbot.js";
 import { renderPage } from "./pages.js";
 import { initializeChrome, initReveal, showToast } from "./site.js";
 
@@ -277,11 +278,13 @@ function init() {
   bindImageFallbacks();
   initReveal();
   initFeaturedShowcase();
+  initChatbot();
   initLeadForm();
   initDashboardActions();
   initRoiControls();
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 
 

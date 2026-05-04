@@ -1,4 +1,4 @@
-export const leadIntentOptions = [
+﻿export const leadIntentOptions = [
   "Site Visit",
   "Brochure Request",
   "Callback",
@@ -13,13 +13,17 @@ export const leadIntentOptions = [
 export const projectInterestOptions = [
   "Rivlyn Estate",
   "Serenity Park",
-  "Elarise Park",
+  "Violet Park II",
   "Diviana Park",
+  "Elarise Park",
+  "Leafwood Park",
+  "Orchard Park",
   "Avyay Park",
-  "Upcoming Mangaon",
-  "Vanarai Park",
-  "Investment",
-  "Farmer Certificate Advisory",
+  "Shrivardhan Seawinds Park",
+  "Shahapur Nest Park",
+  "Investor / Promoter",
+  "Farmer Certificate Support",
+  "Advisory Services",
   "Free Legal Advice",
   "Other"
 ];

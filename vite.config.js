@@ -1,7 +1,27 @@
+﻿import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
+const staticDirectories = ["photos", "chatbot"];
+
+function copyStaticDirectories() {
+  return {
+    name: "copy-static-directories",
+    writeBundle(outputOptions) {
+      const outDir = outputOptions.dir || resolve(__dirname, "dist");
+      for (const directory of staticDirectories) {
+        const source = resolve(__dirname, directory);
+        if (!existsSync(source)) continue;
+        const target = resolve(outDir, directory);
+        mkdirSync(target, { recursive: true });
+        cpSync(source, target, { recursive: true, force: true });
+      }
+    }
+  };
+}
+
 export default defineConfig({
+  plugins: [copyStaticDirectories()],
   build: {
     rollupOptions: {
       input: {

@@ -1,34 +1,50 @@
-export const brandData = {
+﻿export const brandData = {
   name: "Acreages Developers",
   shortName: "Acreages",
   eyebrow: "Premium Farmhouse & Weekend Home Projects Near Mumbai, Navi Mumbai & Pune",
   heroTitle: "Nature-first living with legal clarity, premium locations, and a smoother path to ownership.",
   heroDescription:
-    "Explore Acreages Developers' riverfront, forest-facing, hill-station, and highway-front opportunities across Shahapur, Murbad, Kamshet, Shirwal, and upcoming growth corridors. Built around clear-title positioning, calm lifestyle storytelling, and serious buyer support.",
+    "Explore Acreages Developers' riverfront, forest-facing, hill-station, lake-touch, and highway-front opportunities across Shahapur, Murbad, Kamshet, Shirwal, and upcoming growth corridors. Built around clear-title positioning, calm lifestyle storytelling, and serious buyer support.",
+  aboutSummary:
+    "Acreages Developers focuses on premium weekend homes, farmhouse plots, villa-ready land, agricultural and farm-land opportunities, and strategic land-investment stories near Mumbai and Pune. The public brand story combines nature, family legacy, legal clarity, gated-community comfort, and long-term ownership confidence.",
   trustChips: [
     "Clear Title Projects",
     "12+ Years",
     "7+ Sold-Out Projects",
-    "Riverfront & Forest-Facing Locations"
+    "Riverfront, Hill-Station & Highway-Front Options"
+  ],
+  pillars: [
+    "Lifestyle",
+    "Investment",
+    "Income Potential",
+    "Trust and Legality",
+    "Community",
+    "Sustainability"
+  ],
+  buyerDreams: [
+    "Family weekends and legacy ownership",
+    "Nature living across rivers, forests, hills, and open skies",
+    "Land appreciation and optional value-generation routes",
+    "Documentation, legal clarity, and safer decision-making"
   ],
   stats: [
     {
       label: "Years Of Experience",
       value: 12,
       suffix: "+",
-      note: "Acreages publicly presents a 12+ year real-estate journey with legal and ethical emphasis."
+      note: "Acreages commonly presents a 12+ year real-estate journey with legal and ethical emphasis."
     },
     {
       label: "Sold-Out Projects",
       value: 7,
       suffix: "+",
-      note: "The live site references 7+ sold-out projects across earlier launches and legacy communities."
+      note: "The public story references 7+ sold-out projects across earlier launches and legacy communities."
     },
     {
-      label: "Legally Focused",
-      value: 100,
-      suffix: "%",
-      note: "The About page explicitly emphasizes 100% legal compliance and an ethical approach."
+      label: "Brand Pillars",
+      value: 6,
+      suffix: "",
+      note: "Lifestyle, investment, income potential, trust, community, and sustainability shape the current Acreages story."
     }
   ],
   heroMedia: {
@@ -53,8 +69,10 @@ export const brandData = {
     channelPartnerPhone: "+91 8652147931",
     email: "contact@acreages.co.in",
     channelPartnerEmail: "shashikant@acreages.co.in",
+    investorName: "Mr. Shani Malave",
+    investorEmail: "shani@acreages.co.in",
     address:
-      "Moreshwar, A301, 3rd Floor, Plot A35, Sector 20, Opp. Station, Nerul (W), Navi Mumbai, 400706, India",
+      "Moreshwar, A301, 3rd Floor, Plot A35, Sector 20, Opp. Station, Nerul West, Navi Mumbai, 400706, India",
     whatsapp: "https://wa.me/919892148789?text=Hi%20Acreages%2C%20I%20am%20interested%20in%20farmhouse%2Fweekend%20home%20projects.%20Please%20share%20details.",
     whatsappNumber: "919892148789"
   },
@@ -64,7 +82,7 @@ export const brandData = {
     whatsapp: "https://wa.me/919892148789?text=Hi%20Acreages%2C%20I%20am%20interested%20in%20farmhouse%2Fweekend%20home%20projects.%20Please%20share%20details."
   },
   footerDescription:
-    "Acreages Developers presents premium weekend-home, farmhouse, riverfront, hill-station, and investment-led land stories near Mumbai, Navi Mumbai, Pune, and Thane with an organized buyer journey from first enquiry to site visit.",
+    "Acreages Developers presents premium weekend-home, farmhouse, riverfront, hill-station, lake-touch, and investment-led land stories near Mumbai, Navi Mumbai, Pune, and Thane with an organized buyer journey from first enquiry to site visit.",
   seo: {
     title:
       "Acreages Developers | Premium Farmhouse & Weekend Homes Near Mumbai, Navi Mumbai & Pune",
