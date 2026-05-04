@@ -219,55 +219,95 @@ export const faqHighlights = [
   {
     question: "What does Acreages do?",
     answer:
-      "Acreages develops and markets weekend homes, farmhouse plots, villa-ready land, selected residential NA plots, and land-investment opportunities near Mumbai and Pune."
+      "Acreages develops and markets weekend homes, farmhouse plots, villa-ready land, residential NA plots, luxury homes, mixed-use projects, and land investment opportunities near Mumbai and Pune."
+  },
+  {
+    question: "How much experience does Acreages have?",
+    answer:
+      "Acreages commonly states 12+ years of experience and 7+ sold-out projects on public pages."
+  },
+  {
+    question: "What types of projects does Acreages offer?",
+    answer:
+      "Weekend homes, budget homes, residential NA plots, farmhouse projects, luxury homes, farmstead projects, villa communities, and selected commercial or highway-front land opportunities."
   },
   {
     question: "Does Acreages offer financing?",
     answer:
-      "The FAQ mentions financing support through banks and financial institutions, including home-loan, construction-loan, and EMI possibilities, subject to eligibility."
+      "The FAQ mentions financing support through banks and financial institutions, including home loans, construction loans, and EMI plans. Exact eligibility depends on the buyer, project, lender, and documentation."
   },
   {
     question: "Does Acreages provide a relationship manager?",
     answer:
-      "Yes. The public FAQ mentions dedicated relationship-manager support during the buying process."
+      "Yes, the FAQ mentions dedicated relationship manager support during the buying process."
+  },
+  {
+    question: "Are Acreages projects gated communities?",
+    answer:
+      "Many public project pages mention gated communities, internal roads, security, utilities, amenities, and maintenance support. Features vary by project."
   },
   {
     question: "Can weekend homes generate rental income?",
     answer:
-      "Acreages discusses OTA rentals, farm stays, and guest-stay possibilities, but income is not guaranteed and depends on operations, design, pricing, demand, and rules."
+      "Acreages discusses OTA rentals, farm stays, and guest-stay possibilities. However, rental income is not guaranteed and depends on location, design, operations, demand, pricing, and regulations."
+  },
+  {
+    question: "Can I use a weekend home as a permanent residence?",
+    answer:
+      "The FAQ suggests some weekend homes may potentially become future primary homes. The buyer should confirm project approvals, usage rules, utilities, road access, and local regulations before deciding."
   },
   {
     question: "Can land be passed to heirs?",
     answer:
-      "The public story talks about freehold and legacy ownership, while final succession or transfer questions should be confirmed through documentation and legal professionals."
+      "The FAQ mentions freehold projects and legacy ownership. For succession or legal transfer, buyers should consult legal professionals and Acreages documentation team."
   },
   {
-    question: "Can weekend-home property be used as collateral?",
+    question: "Can weekend home property be used as collateral?",
     answer:
-      "The FAQ says it may be possible, but lender acceptance depends on title, valuation, project specifics, and documentation."
+      "The FAQ says weekend homes may be used as loan collateral. Final acceptance depends on lenders, title, valuation, and documentation."
   }
 ];
 
 export const landTermHighlights = [
   {
+    question: "What is a weekend home?",
+    answer:
+      "A weekend home is a second or vacation home used for relaxation, family time, recreation, and nature living away from the city."
+  },
+  {
+    question: "What is a farmhouse plot?",
+    answer:
+      "A farmhouse plot is usually a rural or semi-rural land parcel meant for farmhouse use, farming, leisure, second-home living, or long-term land investment."
+  },
+  {
+    question: "What is an NA plot?",
+    answer:
+      "NA means non-agricultural. The FAQ describes NA plots as gated individual residential plots where buyers can construct weekend homes, subject to approvals and regulations."
+  },
+  {
     question: "What does clear title mean?",
     answer:
-      "Clear title refers to clean and transferable ownership, but buyers should still verify title papers, 7/12 records, encumbrances, approvals, and legal documentation."
+      "Clear title means the ownership and legal rights of the land are represented as clean and transferable. Buyers should always verify title documents, 7/12 extract, encumbrance, approvals, and legal documentation before purchase."
   },
   {
-    question: "What is a 7/12 extract?",
+    question: "What is 7/12?",
     answer:
-      "It is a Maharashtra land-record document. Some Acreages projects publicly mention separate 7/12 records, and buyers should always verify the current official extract."
+      "A 7/12 extract is a land record document commonly used in Maharashtra. Several Acreages pages mention separate 7/12 for certain projects. Buyers should verify current official records before purchase."
   },
   {
-    question: "What is a guntha?",
+    question: "What is guntha?",
     answer:
-      "A guntha is a land-measurement unit commonly used in Maharashtra. Public FAQ wording treats 1 guntha as about 1,089 sq ft, but final dimensions should come from project documents."
+      "Guntha is a land measurement used in Maharashtra and other regions. In Maharashtra, 1 guntha is commonly treated as about 1,089 sq ft. Buyers should confirm exact measurement and plot dimensions from the project documents."
   },
   {
     question: "What is Category 1 land?",
     answer:
-      "Some Acreages pages use the Category 1 wording. The safest public route is to treat it as a project-level descriptor and direct legal interpretation to the Acreages team."
+      "Some Acreages pages mention Category 1 land for projects such as Avyay Park, Violet Park, and Elarise Park. For public use, do not explain the legal status beyond the public wording; route the legal meaning and document verification to the Acreages team."
+  },
+  {
+    question: "What is farmer certificate support?",
+    answer:
+      "Acreages mentions farmer certificate support and offers. The exact process, eligibility, and documentation should be confirmed directly with the Acreages team or a qualified legal advisor."
   }
 ];
 
@@ -359,43 +399,77 @@ export const careersHighlights = [
 
 export const privacyHighlights = [
   {
-    title: "Information use",
+    title: "Personal information",
     text:
-      "The privacy summary mentions using personal details for enquiries, service communication, analytics, website improvement, and consent-based marketing."
+      "Acreages may collect personal information such as name, email, phone number, and contact details."
+  },
+  {
+    title: "Log and tracking data",
+    text:
+      "It may collect log data such as IP address, browser type, operating system, cookies, and tracking data."
+  },
+  {
+    title: "How data may be used",
+    text:
+      "Data may be used for inquiries, service information, analytics, website improvement, marketing communication with consent, and legal compliance."
   },
   {
     title: "Marketing choices",
     text:
-      "Users may opt out of marketing communication, and privacy questions can be sent to contact@acreages.co.in."
+      "Users may opt out of marketing communication."
   },
   {
-    title: "Minimum-data approach",
+    title: "Children's privacy",
     text:
-      "The safest lead flow is to collect only the minimum information needed for a callback, brochure, or visit arrangement."
+      "The website is not intended for children under 13."
+  },
+  {
+    title: "Privacy questions",
+    text:
+      "Privacy questions can be sent to contact@acreages.co.in."
+  },
+  {
+    title: "Minimum-data demo approach",
+    text:
+      "This demo should collect only the minimum lead information needed, explain why it is collected, and avoid asking for sensitive documents in open chat or public forms."
   }
 ];
 
-
 export const termsHighlights = [
   {
-    title: "Informational content only",
+    title: "General informational purpose",
     text:
-      "The public terms summary says website content is for general informational purposes and should not be treated as a final legal or commercial commitment."
+      "Website content is for general informational purposes only."
   },
   {
     title: "Accuracy and suitability",
     text:
-      "Acreages does not guarantee the accuracy, completeness, or suitability of website information, especially where pricing, inventory, legal status, or timelines may change."
+      "Acreages does not guarantee the accuracy, completeness, or suitability of website information."
   },
   {
-    title: "Content protection",
+    title: "Copyright",
     text:
-      "Website content is protected by copyright, and users may not reproduce, modify, or distribute it without written permission."
+      "Website content is protected by copyright."
   },
   {
-    title: "Third-party links and jurisdiction",
+    title: "Content reuse restrictions",
     text:
-      "Third-party links are not endorsements, and the public terms summary references Navi Mumbai jurisdiction for disputes."
+      "Users may not reproduce, modify, or distribute content without written permission."
+  },
+  {
+    title: "Third-party links",
+    text:
+      "Third-party links are not endorsed."
+  },
+  {
+    title: "Jurisdiction",
+    text:
+      "Disputes fall under Navi Mumbai jurisdiction."
+  },
+  {
+    title: "Policy updates",
+    text:
+      "Terms may change without notice."
   }
 ];
 
@@ -421,4 +495,5 @@ export const blogTopicClusters = [
       "NRI investment, retirement-use thinking, and OTA profitability topics widen the buyer funnel without changing the brand tone."
   }
 ];
+
 

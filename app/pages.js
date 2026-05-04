@@ -804,8 +804,8 @@ function faqPage() {
     <section class="section-shell story-grid">
       <div class="section-copy reveal">
         <p class="eyebrow">FAQ</p>
-        <h2>Helpful Acreages answers, now kept fully inside your own website.</h2>
-        <p>The FAQ page brings together the most useful public Acreages buyer questions around projects, financing, relationship support, rental thinking, land transfer, and practical ownership clarity.</p>
+        <h2>Document-backed Acreages answers, now kept fully inside your own website.</h2>
+        <p>This page brings together the Acreages buyer questions, land terms, and project-selection guidance captured in the main data document, without sending visitors back to the old site.</p>
       </div>
       <div class="feature-grid reveal-delay">
         ${featureCards(projectSelectionGuides)}
@@ -815,7 +815,7 @@ function faqPage() {
     <section class="section-shell collection-section">
       <div class="section-heading reveal">
         <p class="eyebrow">General Buyer Questions</p>
-        <h2>Start with the questions most serious buyers usually ask first.</h2>
+        <h2>Start with the core public questions buyers usually ask first.</h2>
       </div>
       <div class="collection-grid">
         ${faqCards(faqHighlights)}
@@ -825,8 +825,8 @@ function faqPage() {
     <section class="section-shell collection-section">
       <div class="section-heading reveal">
         <p class="eyebrow">Land Terms</p>
-        <h2>Useful land-language clarity without overpromising legal interpretation.</h2>
-        <p>Acreages publicly uses terms like clear title, 7/12, guntha, and Category 1 land. This page keeps the wording cautious and routes final interpretation to the Acreages team where needed.</p>
+        <h2>Useful land-language clarity using the document wording and careful legal boundaries.</h2>
+        <p>Acreages publicly uses terms like clear title, 7/12, guntha, Category 1 land, and farmer certificate support. This page keeps the source wording careful and routes final interpretation to the Acreages team where needed.</p>
       </div>
       <div class="collection-grid">
         ${faqCards(landTermHighlights)}
@@ -860,8 +860,8 @@ function privacyPage() {
     <section class="section-shell story-grid">
       <div class="section-copy reveal">
         <p class="eyebrow">Privacy Policy</p>
-        <h2>A cleaner, internal privacy summary for the Acreages demo.</h2>
-        <p>This page reflects the public Acreages privacy and terms summaries from the main data document, while keeping the experience inside your own approved UI instead of redirecting visitors away.</p>
+        <h2>The Acreages privacy and terms summary, now kept inside your own website.</h2>
+        <p>This page reflects the privacy and terms summary captured in the main Acreages data document, while keeping the experience inside your approved UI instead of redirecting visitors away.</p>
         <div class="contact-badges">
           <span>Minimum lead data</span>
           <span>Opt-out aware</span>
@@ -876,7 +876,7 @@ function privacyPage() {
     <section class="section-shell collection-section">
       <div class="section-heading reveal">
         <p class="eyebrow">Terms Summary</p>
-        <h2>What the public Acreages terms and privacy wording is broadly communicating.</h2>
+        <h2>What the public Acreages terms summary states.</h2>
       </div>
       <div class="collection-grid">
         ${termsHighlights.map((item) => `
@@ -1096,6 +1096,7 @@ export function renderPage(page) {
   const template = pages[page] || homePage;
   main.innerHTML = template();
 }
+
 
 
 
