@@ -271,6 +271,178 @@ function initFeaturedShowcase() {
   startAutoplay();
 }
 
+function initGalleryExperience() {
+  const cards = Array.from(document.querySelectorAll("[data-gallery-item]"));
+  if (!cards.length) return;
+
+  const filterButtons = Array.from(document.querySelectorAll("[data-gallery-filter]"));
+  const items = cards.map((card, index) => {
+    const image = card.querySelector("img");
+    return {
+      card,
+      figure: card.closest("[data-gallery-figure]"),
+      src: image?.getAttribute("src") || fallbackImage,
+      alt: image?.getAttribute("alt") || "Acreages gallery image",
+      project: card.dataset.project || "Acreages",
+      type: card.dataset.type || "General",
+      index
+    };
+  });
+
+  let activeFilter = "all";
+  let activeIndices = items.map((item) => item.index);
+  let currentVisiblePosition = 0;
+  let touchStartX = 0;
+  let touchDeltaX = 0;
+
+  const shellId = "galleryLightbox";
+  if (!document.getElementById(shellId)) {
+    document.body.insertAdjacentHTML("beforeend", `
+      <div class="gallery-lightbox" id="${shellId}" aria-hidden="true">
+        <div class="gallery-lightbox__backdrop" data-gallery-close></div>
+        <div class="gallery-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Acreages gallery viewer">
+          <button class="gallery-lightbox__close" type="button" data-gallery-close aria-label="Close gallery viewer">x</button>
+          <div class="gallery-lightbox__media-wrap">
+            <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" type="button" data-gallery-prev aria-label="Previous image">&lsaquo;</button>
+            <img class="gallery-lightbox__image" id="galleryLightboxImage" src="" alt="">
+            <button class="gallery-lightbox__nav gallery-lightbox__nav--next" type="button" data-gallery-next aria-label="Next image">&rsaquo;</button>
+          </div>
+          <div class="gallery-lightbox__details">
+            <div>
+              <span class="gallery-lightbox__type" id="galleryLightboxType"></span>
+              <h3 id="galleryLightboxProject"></h3>
+              <p id="galleryLightboxCaption"></p>
+            </div>
+            <span class="gallery-lightbox__count" id="galleryLightboxCount"></span>
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
+  const lightbox = document.getElementById(shellId);
+  const lightboxImage = document.getElementById("galleryLightboxImage");
+  const lightboxType = document.getElementById("galleryLightboxType");
+  const lightboxProject = document.getElementById("galleryLightboxProject");
+  const lightboxCaption = document.getElementById("galleryLightboxCaption");
+  const lightboxCount = document.getElementById("galleryLightboxCount");
+  const closeButtons = Array.from(lightbox.querySelectorAll("[data-gallery-close]"));
+  const previousButton = lightbox.querySelector("[data-gallery-prev]");
+  const nextButton = lightbox.querySelector("[data-gallery-next]");
+
+  function refreshVisibleItems() {
+    activeIndices = items
+      .filter((item) => !item.figure.classList.contains("is-hidden"))
+      .map((item) => item.index);
+    if (!activeIndices.length) {
+      activeIndices = items.map((item) => item.index);
+    }
+  }
+
+  function updateLightbox(position) {
+    refreshVisibleItems();
+    currentVisiblePosition = (position + activeIndices.length) % activeIndices.length;
+    const current = items[activeIndices[currentVisiblePosition]];
+    if (!current) return;
+    lightboxImage.src = current.src;
+    lightboxImage.alt = current.alt;
+    lightboxType.textContent = current.type;
+    lightboxProject.textContent = current.project;
+    lightboxCaption.textContent = current.alt;
+    lightboxCount.textContent = `${currentVisiblePosition + 1} / ${activeIndices.length}`;
+  }
+
+  function openLightbox(index) {
+    refreshVisibleItems();
+    const nextPosition = Math.max(0, activeIndices.indexOf(index));
+    updateLightbox(nextPosition);
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("gallery-lightbox-open");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("gallery-lightbox-open");
+  }
+
+  function stepLightbox(direction) {
+    updateLightbox(currentVisiblePosition + direction);
+  }
+
+  function applyFilter(filter) {
+    activeFilter = filter;
+    filterButtons.forEach((button) => {
+      const isActive = button.dataset.filter === filter;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    items.forEach((item) => {
+      const normalizedType = item.type.toLowerCase().replaceAll(" ", "-");
+      const isVisible = filter === "all" || normalizedType === filter;
+      item.figure.classList.toggle("is-hidden", !isVisible);
+    });
+
+    refreshVisibleItems();
+    if (lightbox.classList.contains("is-open")) {
+      updateLightbox(0);
+    }
+  }
+
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => openLightbox(index));
+    card.addEventListener("pointermove", (event) => {
+      if (window.innerWidth < 900) return;
+      const bounds = card.getBoundingClientRect();
+      const offsetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
+      const offsetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * -10;
+      card.style.setProperty("--gallery-rotate-x", `${offsetY.toFixed(2)}deg`);
+      card.style.setProperty("--gallery-rotate-y", `${offsetX.toFixed(2)}deg`);
+      card.classList.add("is-tilting");
+    });
+    card.addEventListener("pointerleave", () => {
+      card.classList.remove("is-tilting");
+      card.style.removeProperty("--gallery-rotate-x");
+      card.style.removeProperty("--gallery-rotate-y");
+    });
+  });
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => applyFilter(button.dataset.filter || "all"));
+  });
+
+  closeButtons.forEach((button) => button.addEventListener("click", closeLightbox));
+  previousButton?.addEventListener("click", () => stepLightbox(-1));
+  nextButton?.addEventListener("click", () => stepLightbox(1));
+
+  lightbox.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0]?.clientX || 0;
+    touchDeltaX = 0;
+  }, { passive: true });
+
+  lightbox.addEventListener("touchmove", (event) => {
+    const currentX = event.changedTouches[0]?.clientX || 0;
+    touchDeltaX = currentX - touchStartX;
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", () => {
+    if (Math.abs(touchDeltaX) > 45) {
+      stepLightbox(touchDeltaX < 0 ? 1 : -1);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!lightbox.classList.contains("is-open")) return;
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") stepLightbox(-1);
+    if (event.key === "ArrowRight") stepLightbox(1);
+  });
+
+  applyFilter(activeFilter);
+}
+
 function init() {
   const page = document.body.dataset.page || "home";
   initializeChrome(page);
@@ -278,6 +450,7 @@ function init() {
   bindImageFallbacks();
   initReveal();
   initFeaturedShowcase();
+  initGalleryExperience();
   initChatbot();
   initLeadForm();
   initDashboardActions();
@@ -285,6 +458,8 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+
 
 
 

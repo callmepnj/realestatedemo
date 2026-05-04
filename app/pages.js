@@ -102,10 +102,37 @@ function soldOutCard(project) {
   `;
 }
 
-function galleryCard(image, large = false, delay = "") {
+function formatGalleryMeta(value) {
+  return String(value || "General")
+    .replaceAll("-", " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+function galleryCard(image, large = false, delay = "", index = 0) {
+  const project = formatGalleryMeta(image.project);
+  const type = formatGalleryMeta(image.type);
+  const description = escapeHtml(image.alt);
   return `
-    <figure class="gallery-card${large ? " gallery-card-large" : ""} ${delay}">
-      <img src="/${image.src}" alt="${escapeHtml(image.alt)}" loading="lazy">
+    <figure class="gallery-card${large ? " gallery-card-large" : ""} ${delay}" data-gallery-figure>
+      <button
+        class="gallery-card__button"
+        type="button"
+        data-gallery-item
+        data-index="${index}"
+        data-project="${escapeHtml(project)}"
+        data-type="${escapeHtml(type)}"
+        aria-label="Open ${escapeHtml(project)} image"
+      >
+        <img src="/${image.src}" alt="${description}" loading="lazy">
+        <figcaption class="gallery-card__meta">
+          <span class="gallery-card__type">${type}</span>
+          <strong>${project}</strong>
+          <small>${description}</small>
+        </figcaption>
+      </button>
     </figure>
   `;
 }
@@ -332,11 +359,11 @@ function homePage() {
         <p>The gallery keeps the same visual energy while using Acreages-specific project and lifestyle imagery.</p>
       </div>
       <div class="gallery-grid">
-        ${galleryCard(galleryImages[0], true, "reveal")}
-        ${galleryCard(galleryImages[1], false, "reveal-delay")}
-        ${galleryCard(galleryImages[2], false, "reveal-delay-2")}
-        ${galleryCard(galleryImages[3], false, "reveal")}
-        ${galleryCard(galleryImages[4], false, "reveal-delay")}
+        ${galleryCard(galleryImages[0], true, "reveal", 0)}
+        ${galleryCard(galleryImages[1], false, "reveal-delay", 1)}
+        ${galleryCard(galleryImages[2], false, "reveal-delay-2", 2)}
+        ${galleryCard(galleryImages[3], false, "reveal", 3)}
+        ${galleryCard(galleryImages[4], false, "reveal-delay", 4)}
       </div>
     </section>
 
@@ -600,40 +627,143 @@ function nriPage() {
 
 function galleryPage() {
   const items = galleryImages.slice(0, 12);
+  const galleryFilters = ["All", ...new Set(items.map((image) => formatGalleryMeta(image.type)))];
   return `
     <section class="section-shell gallery-section">
       <div class="section-heading reveal">
         <p class="eyebrow">Gallery</p>
         <h2>Acreages visuals matched to your local image library.</h2>
-        <p>This page keeps the original gallery feel while using Acreages-specific project and lifestyle imagery.</p>
+        <p>This page keeps the original gallery feel while adding richer project detail, movement, and swipe-friendly viewing.</p>
       </div>
-      <div class="gallery-grid">
-        ${items.map((image, index) => galleryCard(image, index === 0, index % 3 === 1 ? "reveal-delay" : index % 3 === 2 ? "reveal-delay-2" : "reveal")).join("")}
+
+      <div class="gallery-toolbar reveal-delay">
+        <div class="gallery-filters" role="tablist" aria-label="Gallery categories">
+          ${galleryFilters.map((filter, index) => `
+            <button
+              class="gallery-filter${index === 0 ? " is-active" : ""}"
+              type="button"
+              data-gallery-filter
+              data-filter="${filter === "All" ? "all" : filter.toLowerCase().replaceAll(" ", "-")}"
+              aria-pressed="${index === 0 ? "true" : "false"}"
+            >${filter}</button>
+          `).join("")}
+        </div>
+        <p class="gallery-toolbar__hint">Hover for project detail, tap to open, and swipe through the collection.</p>
+      </div>
+
+      <div class="gallery-grid" data-gallery-grid>
+        ${items.map((image, index) => galleryCard(image, index === 0, index % 3 === 1 ? "reveal-delay" : index % 3 === 2 ? "reveal-delay-2" : "reveal", index)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function getSelectedBlogPost() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("post");
+  if (!slug) return null;
+  return blogPosts.find((post) => post.slug === slug) || null;
+}
+
+function blogDetailPage(post) {
+  const relatedPosts = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  return `
+    <section class="section-shell story-grid">
+      <div class="section-copy reveal">
+        <a class="text-link" href="${pageHref("blogs")}">Back to all insights</a>
+        <p class="eyebrow">Acreages Insight Brief</p>
+        <h2>${post.title}</h2>
+        <p>${post.overview}</p>
+        <div class="contact-badges">
+          <span>${post.date}</span>
+          <span>${post.category}</span>
+          <span>Internal demo view</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="${contactHref("Brochure Request")}">Talk to Acreages</a>
+          <a class="btn btn-outline" href="${pageHref("projects")}">Explore Projects</a>
+        </div>
+      </div>
+      <div class="location-photo reveal-delay">
+        <img src="/${post.image}" alt="${escapeHtml(post.alt)}" loading="lazy">
+      </div>
+    </section>
+
+    <section class="section-shell collection-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">What This Topic Helps Explain</p>
+        <h2>Useful buyer education, kept inside the Acreages experience.</h2>
+        <p>${post.snippet}</p>
+      </div>
+      <div class="collection-grid">
+        ${post.learnings.map((learning, index) => `
+          <article class="collection-card reveal">
+            <p class="card-label">Insight ${index + 1}</p>
+            <h3>${post.category}</h3>
+            <ul>
+              <li>${learning}</li>
+            </ul>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="section-shell story-grid">
+      <div class="section-copy reveal">
+        <p class="eyebrow">Why It Matters</p>
+        <h2>These content pieces help serious buyers think before they enquire.</h2>
+        <p>Acreages' blog strategy supports trust, buyer education, and early-stage clarity across lifestyle, investment, agriculture, legal, family, and location-growth themes.</p>
+      </div>
+      <div class="feature-grid reveal-delay">
+        ${featureCards(blogTopicClusters.slice(0, 3))}
+      </div>
+    </section>
+
+    <section class="section-shell collection-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Related Insights</p>
+        <h2>Continue exploring Acreages learning content without leaving the site.</h2>
+      </div>
+      <div class="collection-grid">
+        ${relatedPosts.map((item) => `
+          <article class="collection-card reveal">
+            <p class="card-label">${item.date} &bull; ${item.category}</p>
+            <h3>${item.title}</h3>
+            <ul>
+              <li>${item.snippet}</li>
+            </ul>
+            <a class="text-link" href="${pageHref("blogs")}?post=${item.slug}">Open Insight</a>
+          </article>
+        `).join("")}
       </div>
     </section>
   `;
 }
 
 function blogsPage() {
+  const selectedPost = getSelectedBlogPost();
+  if (selectedPost) {
+    return blogDetailPage(selectedPost);
+  }
+
   return `
     <section class="section-shell collection-section">
       <div class="section-heading reveal">
         <p class="eyebrow">Blogs</p>
-        <h2>Public Acreages articles that support buyer education.</h2>
-        <p>The document added more real visible topics, dates, and SEO clusters here without forcing invented article detail into the site.</p>
+        <h2>Public Acreages articles that now stay inside your own premium UI.</h2>
+        <p>The cards below open internal insight views built from the real public article topics, dates, and summaries already extracted for the demo.</p>
       </div>
       <div class="collection-grid">
         ${blogPosts.map((post) => `
           <article class="collection-card reveal">
             <p class="card-label">${post.date} &bull; ${post.category}</p>
             <h3>${post.title}</h3>
-            <strong class="price-line">Buyer Education</strong>
+            <strong class="price-line">Acreages Insight Brief</strong>
             <ul>
               <li>${post.snippet}</li>
-              <li>Use this content to support SEO, trust, and earlier-stage buyer learning.</li>
-              <li>Public source remains linked below.</li>
+              <li>${post.overview}</li>
             </ul>
-            <a class="text-link" href="${post.link}" target="_blank" rel="noopener noreferrer">Read Public Source</a>
+            <a class="text-link" href="${pageHref("blogs")}?post=${post.slug}">Open Insight</a>
           </article>
         `).join("")}
       </div>
@@ -849,6 +979,10 @@ export function renderPage(page) {
   const template = pages[page] || homePage;
   main.innerHTML = template();
 }
+
+
+
+
 
 
 
