@@ -375,6 +375,30 @@ export const privacyHighlights = [
   }
 ];
 
+
+export const termsHighlights = [
+  {
+    title: "Informational content only",
+    text:
+      "The public terms summary says website content is for general informational purposes and should not be treated as a final legal or commercial commitment."
+  },
+  {
+    title: "Accuracy and suitability",
+    text:
+      "Acreages does not guarantee the accuracy, completeness, or suitability of website information, especially where pricing, inventory, legal status, or timelines may change."
+  },
+  {
+    title: "Content protection",
+    text:
+      "Website content is protected by copyright, and users may not reproduce, modify, or distribute it without written permission."
+  },
+  {
+    title: "Third-party links and jurisdiction",
+    text:
+      "Third-party links are not endorsements, and the public terms summary references Navi Mumbai jurisdiction for disputes."
+  }
+];
+
 export const blogTopicClusters = [
   {
     title: "Investment and legal learning",
@@ -397,3 +421,4 @@ export const blogTopicClusters = [
       "NRI investment, retirement-use thinking, and OTA profitability topics widen the buyer funnel without changing the brand tone."
   }
 ];
+

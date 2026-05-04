@@ -10,7 +10,9 @@ const routeMap = {
   gallery: "/gallery/",
   blogs: "/blogs/",
   contact: "/contact/",
-  dashboard: "/dashboard/"
+  dashboard: "/dashboard/",
+  faq: "/faq/",
+  privacy: "/privacy/"
 };
 
 const themeKey = "acreages-theme";
@@ -44,6 +46,13 @@ function navLink(link, currentPage, className = "") {
   const current = isActive ? ' aria-current="page"' : "";
   const classes = [className, activeClass].filter(Boolean).join(" ");
   return `<a class="${classes}" href="${link.href || pageHref(link.key)}"${current}>${link.label}</a>`;
+}
+
+
+function footerLink(link) {
+  const external = /^https?:/i.test(link.href);
+  const attributes = external ? ' target="_blank" rel="noopener noreferrer"' : "";
+  return `<a href="${link.href}"${attributes}>${link.label}</a>`;
 }
 
 function renderDesktopNav(currentPage) {
@@ -145,7 +154,7 @@ export function renderFooter() {
     </div>
     <div>
       ${quickLinks.map((link) => `<a href="${link.href}">${link.label}</a>`).join("")}
-      ${legalLinks.slice(0, 2).map((link) => `<a href="${link.href}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}
+      ${legalLinks.slice(0, 2).map(footerLink).join("")}
       <span>${new Date().getFullYear()} Acreages Developers. All rights reserved.</span>
     </div>
   `;
@@ -294,5 +303,7 @@ export function initializeChrome(currentPage) {
   initOutsideClose();
   initFloatingWhatsApp();
 }
+
+
 
 

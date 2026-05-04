@@ -33,8 +33,11 @@ export default defineConfig({
         gallery: resolve(__dirname, "gallery/index.html"),
         blogs: resolve(__dirname, "blogs/index.html"),
         contact: resolve(__dirname, "contact/index.html"),
-        dashboard: resolve(__dirname, "dashboard/index.html")
+        dashboard: resolve(__dirname, "dashboard/index.html"),
+        faq: resolve(__dirname, "faq/index.html"),
+        privacy: resolve(__dirname, "privacy/index.html")
       }
     }
   }
 });
+

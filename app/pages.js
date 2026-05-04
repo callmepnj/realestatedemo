@@ -24,6 +24,7 @@ import {
   privacyHighlights,
   projectSelectionGuides,
   publicOffers,
+  termsHighlights,
   referralHighlights,
   returnRoutes
 } from "../data/support.js";
@@ -798,6 +799,120 @@ function blogsPage() {
   `;
 }
 
+function faqPage() {
+  return `
+    <section class="section-shell story-grid">
+      <div class="section-copy reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Helpful Acreages answers, now kept fully inside your own website.</h2>
+        <p>The FAQ page brings together the most useful public Acreages buyer questions around projects, financing, relationship support, rental thinking, land transfer, and practical ownership clarity.</p>
+      </div>
+      <div class="feature-grid reveal-delay">
+        ${featureCards(projectSelectionGuides)}
+      </div>
+    </section>
+
+    <section class="section-shell collection-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">General Buyer Questions</p>
+        <h2>Start with the questions most serious buyers usually ask first.</h2>
+      </div>
+      <div class="collection-grid">
+        ${faqCards(faqHighlights)}
+      </div>
+    </section>
+
+    <section class="section-shell collection-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Land Terms</p>
+        <h2>Useful land-language clarity without overpromising legal interpretation.</h2>
+        <p>Acreages publicly uses terms like clear title, 7/12, guntha, and Category 1 land. This page keeps the wording cautious and routes final interpretation to the Acreages team where needed.</p>
+      </div>
+      <div class="collection-grid">
+        ${faqCards(landTermHighlights)}
+      </div>
+    </section>
+
+    <section class="section-shell contact-layout">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Need A Specific Answer?</p>
+        <h2>Use the contact route for project-specific pricing, inventory, legal, or site-visit questions.</h2>
+        <p>Some answers depend on live availability, project documents, lender eligibility, or current offers, so the cleanest next step is to request a callback from the Acreages team.</p>
+        <div class="contact-badges">
+          <span>Pricing</span>
+          <span>Availability</span>
+          <span>Legal and Documentation</span>
+        </div>
+      </div>
+      <div class="roi-card reveal-delay">
+        <label>Next step</label>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="${contactHref("Callback")}">Request Callback</a>
+          <a class="btn btn-outline" href="${contactHref("Legal Advice")}">Ask Legal Route</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function privacyPage() {
+  return `
+    <section class="section-shell story-grid">
+      <div class="section-copy reveal">
+        <p class="eyebrow">Privacy Policy</p>
+        <h2>A cleaner, internal privacy summary for the Acreages demo.</h2>
+        <p>This page reflects the public Acreages privacy and terms summaries from the main data document, while keeping the experience inside your own approved UI instead of redirecting visitors away.</p>
+        <div class="contact-badges">
+          <span>Minimum lead data</span>
+          <span>Opt-out aware</span>
+          <span>Contact: ${brandData.contact.email}</span>
+        </div>
+      </div>
+      <div class="feature-grid reveal-delay">
+        ${featureCards(privacyHighlights)}
+      </div>
+    </section>
+
+    <section class="section-shell collection-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Terms Summary</p>
+        <h2>What the public Acreages terms and privacy wording is broadly communicating.</h2>
+      </div>
+      <div class="collection-grid">
+        ${termsHighlights.map((item) => `
+          <article class="collection-card reveal">
+            <p class="card-label">Terms and Privacy</p>
+            <h3>${item.title}</h3>
+            <ul>
+              <li>${item.text}</li>
+            </ul>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="section-shell contact-layout">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Lead Privacy</p>
+        <h2>Only the minimum information should be collected to arrange a callback, brochure, or visit.</h2>
+        <p>The safest public demo approach is to avoid collecting sensitive documents in open flows and instead route serious buyers to the Acreages team for the official next step.</p>
+        <div class="contact-badges">
+          <span>Name</span>
+          <span>Phone</span>
+          <span>Project interest</span>
+        </div>
+      </div>
+      <div class="roi-card reveal-delay">
+        <label>Privacy contact</label>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="mailto:${brandData.contact.email}">Email Support</a>
+          <a class="btn btn-outline" href="${contactHref("Callback")}">Request Callback</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function contactPage() {
   return `
     <section class="section-shell contact-layout">
@@ -973,12 +1088,15 @@ export function renderPage(page) {
     gallery: galleryPage,
     blogs: blogsPage,
     contact: contactPage,
-    dashboard: dashboardPage
+    dashboard: dashboardPage,
+    faq: faqPage,
+    privacy: privacyPage
   };
 
   const template = pages[page] || homePage;
   main.innerHTML = template();
 }
+
 
 
 

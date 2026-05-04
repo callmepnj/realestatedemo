@@ -1,4 +1,4 @@
-export const primaryNavigation = [
+﻿export const primaryNavigation = [
   { key: "home", label: "Home", href: "/" },
   { key: "projects", label: "Projects", href: "/projects/" },
   { key: "villas", label: "Villas", href: "/villas/" },
@@ -46,9 +46,10 @@ export const quickLinks = [
 ];
 
 export const legalLinks = [
-  { label: "FAQ", href: "https://acreages.co.in/frequently-asked-questions/" },
-  { label: "Privacy Policy", href: "https://acreages.co.in/privacy-policy/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Privacy Policy", href: "/privacy/" },
   { label: "Free Legal Advice", href: "https://acreages.co.in/free-legal-advice/" },
   { label: "Channel Partner", href: "https://acreages.co.in/real-estate-channel-partner-program/" },
   { label: "Referrals", href: "https://acreages.co.in/referral-program/" }
 ];
+
